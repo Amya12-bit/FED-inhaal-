@@ -1,31 +1,110 @@
-/**************/
-/* CSS REMEDY */
-/**************/
-*, *::after, *::before {
-  box-sizing:border-box;  
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+   :root {
+    --color-background: #f4f1e8;
+    --color-text: #1d1d1d;
+    --color-white: #ffffff;
+    --color-grey: #777777;
+    --color-border: #d8d4ca;
+
+    --font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    --space-small: 10px;
+    --space-medium: 20px;
+    --space-large: 40px;
+
+   
 }
 
 
+body {
+    width: 100%;
+    max-width: 375px;
 
+    min-height: 100vh;
 
+    margin: 0 auto;
 
+    background-color: var(--color-background);
+    color: var(--color-text);
 
-/*********************/
-/* CUSTOM PROPERTIES */
-/*********************/
-:root {
-	/* startje */
-	--color-text:#111;
-	--color-background:#eee;
+    font-family: var(--font-main);
+
+    font-size: 16px;
+    line-height: 1.4;
+
+    overflow-x: hidden;
 }
 
 
+img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+video {
+    display: block;
+}
+
+a {
+    color: var(--color-text);
+
+    transition:
+        opacity var(--transition-fast);
+}
+
+a:hover {
+    opacity: 0.6;
+}
+
+button {
+    font-family: inherit;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
+p,
+h1,
+h2,
+h3 {
+    margin-top: 0;
+}
 
 
+   .site-header {
+    position: relative;
 
-/****************/
-/* JOUW STYLING */
-/****************/
+    display: flex;
 
-/* jouw code */
+    width: 100%;
+    height: 58px;
+
+    padding: 0 20px;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-background);
+
+    z-index: 1000;
+}
+
 

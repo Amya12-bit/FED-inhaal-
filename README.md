@@ -40,11 +40,11 @@ Nb. Door *open* toe te voegen aan een *details* element kun je deze standaard op
 
   #### Screenshot(s) van de eerste pagina (small screen): 
   Home pagina 
-  <img src="readme-images/dummy-plaatje.jpg" width="375px" alt="omschrijving van de pagina">
+  <img src="readme-images/homepage.jpg" width="375px" alt="Home pagina van de website">
 
   #### Screenshot(s) van de tweede pagina (small screen):
   Product
-  <img src="readme-images/dummy-plaatje.jpg" width="375px" alt="omschrijving van de pagina">
+  <img src="readme-images/itempage.jpg" width="375px" alt="pagina van een item op de wesite">
  
 </details>
 
@@ -57,6 +57,21 @@ Nb. Door *open* toe te voegen aan een *details* element kun je deze standaard op
 
   ### Bevindingen
   Lijst met je bevindingen die in de test naar voren kwamen:
+Mobile & Touch
+Bij het testen van de mobiele weergave viel op dat wanneer de horizontale scroll wordt verwijderd, het menu en het logo over elkaar heen kunnen komen. Hierdoor kan de navigatie minder goed zichtbaar en bruikbaar zijn.
+
+Headings
+Sommige koppen op de website, zoals “Next Event” en “Our Story”, zijn niet als echte heading-elementen (h1, h2, etc.) opgebouwd. Hierdoor kan de structuur van de pagina minder duidelijk zijn voor gebruikers die bijvoorbeeld met een screenreader navigeren.
+
+Media
+De video helemaal bovenaan de homepage staat automatisch op loop en kan niet handmatig worden gepauzeerd. Ook lijkt de video geen captions te hebben. Dit kan een probleem zijn voor gebruikers die de bewegende content niet goed kunnen waarnemen of de informatie uit de video nodig hebben.
+
+Appearance
+De website biedt weinig mogelijkheden om de weergave aan te passen. Er zijn bijvoorbeeld geen instellingen om de tekstgrootte, kleuren of andere visuele eigenschappen aan te passen.
+
+Color Contrast
+Over het algemeen is het contrast goed, maar bij de video bovenaan de homepage kan de tekst soms moeilijk leesbaar zijn. Wanneer er lichte beelden achter de tekst verschijnen, is er onvoldoende contrast tussen de tekst en de achtergrond.
+  
 
 </details>
 
@@ -67,7 +82,9 @@ Nb. Door *open* toe te voegen aan een *details* element kun je deze standaard op
 <details>
   <summary>uitwerken na afloop 3<sup>e</sup> werkgroep</summary>
 
-  ### de hele pagina: 
+  ### de hele pagina:
+  Hier is de link van mijn breakdown schetsen: https://www.figma.com/design/0MrTzvoOTouaeSUABtJn3K/Breakdownschetsen?node-id=0-1&t=mEzAEmNHwPPbaNIK-1 
+   
   <img src="readme-images/dummy-plaatje.jpg" width="375px" alt="breakdown van de hele pagina">
 
   ### dynamisch deel (bijv menu): 
