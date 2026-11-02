@@ -1,0 +1,602 @@
+/*THE CREATIVE LAB — common.css  (responsive)
+   Mobile-first: basis = telefoon, daarna 700px, 900px, 1300px */
+
+   * {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--color-border);
+}
+/* BRON: MDN Web Docs — @font-face
+   https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face
+   Gebruikt voor het toevoegen van de Neue Haas- en EB Garamond-lettertypes. */
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Roman.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "EB Garamond";
+    src: url("../fonts/EBGaramond-Variable.woff2") format("woff2");
+    font-weight: 400 800;
+    font-display: swap;
+}
+
+:root {
+    --color-background: #f4f1e8;
+    --color-text: #1d1d1d;
+    --color-white: #ffffff;
+    --color-grey: #6b6b6b;           /* iets donkerder: contrast 4.5:1 op de achtergrond */
+    --color-border: #d8d4ca;
+
+    --font-main: "Neue Haas", Helvetica, Arial, sans-serif;
+    --font-serif: "EB Garamond", Georgia, serif;
+
+    --transition-fast: 0.25s ease;
+
+    /* Ruimte aan de zijkant: groeit mee met het scherm */
+    --page-padding: 20px;
+    --page-max: 1440px;
+}
+
+/* BRON: W3Schools — CSS Media Queries
+   https://www.w3schools.com/css/css_rwd_mediaqueries.asp
+   Gebruikt om de layout aan te passen aan verschillende schermbreedtes. */
+
+@media (min-width: 700px) {
+    :root { --page-padding: 40px; }
+}
+
+@media (min-width: 1100px) {
+    :root { --page-padding: 64px; }
+}
+
+body {
+    width: 100%;
+    max-width: var(--page-max);
+    min-height: 100vh;
+    margin: 0 auto;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+
+    font-family: var(--font-main);
+    font-size: 16px;
+    line-height: 1.4;
+
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+video {
+    display: block;
+}
+
+a {
+    color: var(--color-text);
+    transition: opacity var(--transition-fast);
+}
+
+a:hover {
+    opacity: 0.6;
+}
+
+button {
+    font-family: inherit;
+}
+
+ul,
+menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
+p,
+h1,
+h2,
+h3 {
+    margin-top: 0;
+}
+
+
+/* HEADER */
+
+header {
+    position: relative;
+    display: flex;
+
+    width: 100%;
+    height: 58px;
+    padding: 0 var(--page-padding);
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-background);
+    z-index: 1000;
+}
+
+/* Logo */
+header > a {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    white-space: nowrap;
+
+    z-index: 1001;
+}
+
+/* Menu-paneel */
+header > nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 90px var(--page-padding) 40px;
+
+    background-color: var(--color-background);
+    transform: translateY(-100%);
+    visibility: hidden;
+    overflow-y: auto;
+
+    transition:
+        transform 0.55s cubic-bezier(0.77, 0, 0.18, 1),
+        visibility 0s linear 0.55s;
+
+    z-index: 1500;
+}
+
+header[data-menu="open"] > nav {
+    transform: translateY(0);
+    visibility: visible;
+
+    transition:
+        transform 0.55s cubic-bezier(0.77, 0, 0.18, 1),
+        visibility 0s;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+header nav a {
+    display: block;
+
+    font-size: clamp(32px, 7vw, 56px);
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+
+    opacity: 0;
+    transform: translateY(25px);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+header[data-menu="open"] nav a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header[data-menu="open"] nav a:hover {
+    opacity: 0.6;
+}
+
+header[data-menu="open"] nav li:nth-child(1) a { transition-delay: 0.10s; }
+header[data-menu="open"] nav li:nth-child(2) a { transition-delay: 0.15s; }
+header[data-menu="open"] nav li:nth-child(3) a { transition-delay: 0.20s; }
+header[data-menu="open"] nav li:nth-child(4) a { transition-delay: 0.25s; }
+header[data-menu="open"] nav li:nth-child(5) a { transition-delay: 0.30s; }
+
+/* Hamburger */
+header > button {
+    position: absolute;
+    top: 11px;
+    left: calc(var(--page-padding) - 6px);
+
+    display: flex;
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    z-index: 2001;
+}
+
+header > button span {
+    display: block;
+    width: 23px;
+    height: 1.5px;
+    margin: 3px 0;
+
+    background-color: var(--color-text);
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease;
+}
+
+header[data-menu="open"] > button span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+header[data-menu="open"] > button span:nth-child(2) {
+    opacity: 0;
+}
+
+header[data-menu="open"] > button span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Zoeken en winkelmandje */
+header > menu {
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    height: 58px;
+
+    align-items: center;
+    gap: 7px;
+
+    z-index: 1001;
+}
+
+header > menu:first-of-type {
+    left: calc(var(--page-padding) + 30px);
+}
+
+header > menu:last-of-type {
+    right: calc(var(--page-padding) - 6px);
+}
+
+header > menu button {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+header > menu button:hover {
+    opacity: 0.55;
+    transform: scale(1.05);
+}
+
+header > menu svg {
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+}
+
+/*  Desktop header: menu staat in de balk  */
+@media (min-width: 900px) {
+
+    header {
+        height: 68px;
+    }
+
+    header > button {
+        display: none;
+    }
+
+    header > nav {
+        position: absolute;
+        top: 0;
+        left: var(--page-padding);
+
+        display: flex;
+        width: auto;
+        height: 68px;
+        padding: 0;
+
+        align-items: center;
+        background: transparent;
+        transform: none;
+        visibility: visible;
+        overflow: visible;
+
+        transition: none;
+    }
+
+    header nav ul {
+        flex-direction: row;
+        align-items: center;
+        gap: 28px;
+    }
+
+    header nav a,
+    header[data-menu="open"] nav a {
+        font-size: 14px;
+        opacity: 1;
+        transform: none;
+        transition-delay: 0s;
+    }
+
+    header nav a:hover,
+    header[data-menu="open"] nav a:hover {
+        opacity: 0.6;
+    }
+
+    header > menu {
+        height: 68px;
+    }
+
+    /* Zoeken, account en mandje staan samen rechts */
+    header > menu:first-of-type {
+        left: auto;
+        right: calc(var(--page-padding) + 76px);
+    }
+
+    header > menu:last-of-type {
+        right: calc(var(--page-padding) - 6px);
+    }
+
+    header > a {
+        font-size: 15px;
+    }
+}
+
+
+/* FOOTER  (donker, met fotostrook en grote titel) */
+
+footer {
+    background-color: var(--color-text);
+    color: var(--color-background);
+}
+
+footer > ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+footer > ul img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+footer h2 {
+    margin: 0 var(--page-padding);
+    padding: 28px 0 14px;
+
+    border-bottom: 1px solid rgba(244, 241, 232, 0.35);
+
+    font-size: clamp(26px, 7.4vw, 110px);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: justify;
+    text-align-last: justify;
+}
+
+footer nav {
+    padding: 24px var(--page-padding) 0;
+}
+
+footer nav ul:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 4px 20px;
+
+    margin-bottom: 30px;
+}
+
+footer nav ul:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+footer a {
+    color: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+footer a:focus-visible {
+    outline-color: var(--color-background);
+}
+
+footer > p {
+    margin: 26px var(--page-padding) 6px;
+
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+footer > a {
+    display: block;
+    margin: 0 var(--page-padding);
+}
+
+footer > a:last-of-type {
+    font-weight: 400;
+    text-transform: none;
+}
+
+/* Afbeelding met betaalmethodes (iDEAL, Klarna, PayPal, ...) */
+footer > img {
+    width: 240px;
+    max-width: calc(100% - var(--page-padding) * 2);
+    margin: 40px var(--page-padding) 0;
+}
+
+footer > p:last-child {
+    margin: 16px var(--page-padding) 0;
+    padding-bottom: 28px;
+
+    font-weight: 400;
+    text-transform: none;
+    opacity: 0.8;
+}
+
+/* Desktop: links en lijsten naast elkaar */
+@media (min-width: 900px) {
+
+    footer nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+    }
+
+    footer nav ul:first-child {
+        grid-template-columns: repeat(2, minmax(120px, auto));
+        gap: 6px 60px;
+        margin-bottom: 0;
+    }
+
+    footer nav ul:last-child {
+        gap: 6px;
+    }
+
+    footer a,
+    footer > p {
+        font-size: 13px;
+    }
+
+    /* Onderste rij: copyright links, betaalmethodes rechts */
+    footer {
+        position: relative;
+    }
+
+    footer > img {
+        position: absolute;
+        right: var(--page-padding);
+        bottom: 24px;
+
+        width: 300px;
+        margin: 0;
+    }
+
+    footer > p:last-child {
+        margin-top: 50px;
+        padding-top: 24px;
+
+        border-top: 1px solid rgba(244, 241, 232, 0.35);
+    }
+}
+
+
+/* SCROLL-ANIMATIE (voor beide pagina's) */
+
+[data-reveal="hidden"] {
+    opacity: 0;
+    transform: translateY(35px);
+}
+
+[data-reveal] {
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+[data-reveal="visible"] {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--delay, 0s);
+}
+
+
+/* TOEGANKELIJKHEID */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+ul:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+    }
+
+    [data-reveal="hidden"] {
+        opacity: 1;
+        transform: none;
+    }
+}

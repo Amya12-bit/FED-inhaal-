@@ -1,0 +1,871 @@
+/* THE CREATIVE LAB — home.css  (responsive) */
+
+main > section {
+    padding: 45px var(--page-padding);
+}
+
+main > section h2 {
+    margin-bottom: 20px;
+
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+main > section p {
+    line-height: 1.5;
+}
+
+main > section > a {
+    display: inline-block;
+    margin-top: 20px;
+
+    font-size: 14px;
+    text-underline-offset: 4px;
+}
+
+
+/* 1. HERO */
+
+/* BRON: W3Schools — CSS clamp() Function
+   https://www.w3schools.com/cssref/func_clamp.php
+   Gebruikt om de hoogte van de hero responsief te laten meegroeien
+   met de schermgrootte, met een minimum- en maximumwaarde. */
+main > section:first-child {
+    position: relative;
+
+    height: clamp(560px, 85vh, 900px);
+    padding: 0;
+
+    overflow: hidden;
+}
+
+main > section:first-child video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    pointer-events: none;
+}
+
+main > section:first-child::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0.3) 45%,
+        transparent 80%
+    );
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+main > section:first-child article {
+    position: absolute;
+    inset: auto var(--page-padding) 30px var(--page-padding);
+
+    color: var(--color-white);
+    z-index: 2;
+}
+
+main > section:first-child h1 {
+    max-width: 335px;
+    margin-bottom: 20px;
+
+    font-size: 33px;
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.8px;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
+
+    animation: heroText 0.9s ease 0.25s both;
+}
+
+main > section:first-child article a {
+    display: inline-block;
+
+    padding: 11px 18px;
+    margin-right: 5px;
+
+    border: 1px solid var(--color-white);
+    background-color: transparent;
+    color: var(--color-white);
+
+    font-size: 14px;
+    text-decoration: none;
+
+    animation: heroButton 0.7s ease 0.7s both;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+main > section:first-child article a:focus-visible {
+    outline-color: var(--color-white);
+}
+
+main > section:first-child article a:nth-of-type(2) {
+    animation-delay: 0.85s;
+}
+
+main > section:first-child article a:hover {
+    opacity: 1;
+    background-color: var(--color-white);
+    color: var(--color-text);
+}
+
+/* Pauzeknop voor de video (gemaakt door de JS) */
+main > section:first-child > button {
+    position: absolute;
+    top: 14px;
+    right: var(--page-padding);
+
+    padding: 8px 14px;
+
+    border: 1px solid var(--color-white);
+    background-color: rgba(0, 0, 0, 0.35);
+    color: var(--color-white);
+    cursor: pointer;
+
+    font-size: 12px;
+
+    z-index: 3;
+}
+
+main > section:first-child > button:focus-visible {
+    outline-color: var(--color-white);
+}
+
+@media (min-width: 700px) {
+    main > section:first-child h1 {
+        max-width: 640px;
+        font-size: 46px;
+    }
+
+    main > section:first-child article {
+        bottom: 48px;
+    }
+}
+
+@keyframes heroText {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+}
+
+@keyframes heroButton {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+
+/* 2. INTRO */
+
+main > section:nth-child(2) p {
+    max-width: 820px;
+    margin: 0 auto;
+
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.35;
+    text-align: center;
+}
+
+
+/* CAROUSELS  (secties 4, 6 en de lijst in 7) */
+
+main > section:is(:nth-child(4), :nth-child(6)) > ul,
+main > section:nth-child(7) > ul:last-of-type {
+    display: flex;
+    gap: 15px;
+
+    padding-bottom: 10px;
+
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+
+    cursor: grab;
+}
+
+main > section:is(:nth-child(4), :nth-child(6)) > ul::-webkit-scrollbar,
+main > section:nth-child(7) > ul:last-of-type::-webkit-scrollbar {
+    display: none;
+}
+
+main > section > ul[data-dragging] {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+}
+
+main > section:is(:nth-child(4), :nth-child(6), :nth-child(7)) > ul:last-of-type li {
+    scroll-snap-align: start;
+    user-select: none;
+}
+
+main > section:is(:nth-child(4), :nth-child(6), :nth-child(7)) > ul:last-of-type img {
+    object-fit: cover;
+    pointer-events: none;
+}
+
+
+/* 3. CATEGORIEËN  (2 x 2) */
+
+main > section:nth-child(3) {
+    position: relative;
+    padding: 0;
+}
+
+main > section:nth-child(3) h2 {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: 0;
+
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+main > section:nth-child(3) > ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+main > section:nth-child(3) li {
+    position: relative;
+    overflow: hidden;
+}
+
+main > section:nth-child(3) a {
+    display: block;
+    text-decoration: none;
+}
+
+main > section:nth-child(3) a:hover {
+    opacity: 1;
+}
+
+main > section:nth-child(3) img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+
+    transition: transform 0.6s ease;
+}
+
+main > section:nth-child(3) a:hover img {
+    transform: scale(1.04);
+}
+
+/* Donkere laag zodat de witte tekst goed leesbaar blijft */
+main > section:nth-child(3) li::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+
+    transition: background-color 0.4s ease;
+}
+
+main > section:nth-child(3) li:hover::after {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Tekst precies in het midden van de afbeelding */
+main > section:nth-child(3) span {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-white);
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    text-transform: uppercase;
+
+    z-index: 1;
+}
+
+
+/* 4 en 6. PRODUCTEN */
+
+main > section:is(:nth-child(4), :nth-child(6)) li {
+    flex: 0 0 220px;
+}
+
+main > section:is(:nth-child(4), :nth-child(6)) li > a {
+    display: block;
+    text-decoration: none;
+}
+
+main > section:is(:nth-child(4), :nth-child(6)) img {
+    aspect-ratio: 4 / 5;
+    margin-bottom: 12px;
+}
+
+main > section:is(:nth-child(4), :nth-child(6)) h3 {
+    margin-bottom: 5px;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+main > section:is(:nth-child(4), :nth-child(6)) p {
+    margin: 4px 0;
+
+    color: var(--color-grey);
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+@media (min-width: 700px) {
+    main > section:is(:nth-child(4), :nth-child(6)) li {
+        flex-basis: 260px;
+    }
+}
+
+
+/* 5. NEXT EVENT */
+
+/* Achtergrondkleur van de sectie, zoals op de live site */
+main > section:nth-child(5) {
+    background-color: #e8e7e0;
+}
+
+main > section:nth-child(5) figure {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+main > section:nth-child(5) img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+main > section:nth-child(5) article > p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+main > section:nth-child(5) article > p:first-child {
+    margin-bottom: 8px;
+
+    color: var(--color-grey);
+    font-size: 14px;
+}
+
+main > section:nth-child(5) h3 {
+    margin-bottom: 15px;
+
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+}
+
+main > section:nth-child(5) article a {
+    display: inline-block;
+
+    margin-top: 8px;
+    margin-right: 18px;
+
+    font-size: 14px;
+}
+
+
+/* 7. CREATORS */
+
+main > section:nth-child(7) {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 20px;
+    align-items: start;
+}
+
+main > section:nth-child(7) h2 {
+    grid-column: 1;
+    grid-row: 1;
+
+    margin-bottom: 20px;
+
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+/* "60+" is dun en staat boven "CREATORS" */
+main > section:nth-child(7) h2 span {
+    display: block;
+    font-weight: 300;
+}
+
+main > section:nth-child(7) > ul:first-of-type {
+    grid-column: 2;
+    grid-row: 1;
+
+    text-align: right;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+main > section:nth-child(7) > ul:last-of-type {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    min-width: 0;
+}
+
+main > section:nth-child(7) > ul:last-of-type li {
+    flex: 0 0 180px;
+}
+
+main > section:nth-child(7) img {
+    aspect-ratio: 1 / 1;
+    margin-bottom: 12px;
+}
+
+main > section:nth-child(7) h3 {
+    margin-bottom: 4px;
+
+    font-size: 16px;
+    font-weight: 500;
+}
+
+main > section:nth-child(7) > ul:last-of-type p {
+    margin: 0;
+
+    color: var(--color-grey);
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+@media (min-width: 700px) {
+    main > section:nth-child(7) > ul:last-of-type li {
+        flex-basis: 240px;
+    }
+}
+
+
+/* 8. MEET OUR CREATORS */
+
+main > section:nth-child(8) h2 {
+    margin-bottom: 25px;
+}
+
+main > section:nth-child(8) p {
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+main > section:nth-child(8) > a {
+    margin-top: 5px;
+}
+
+
+/* 9. PARTNERS  (oneindig lopende band) */
+
+main > section:nth-child(9) {
+    overflow: hidden;
+}
+
+main > section:nth-child(9) > ul {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    width: max-content;
+
+    animation: partnerScroll 18s linear infinite;
+}
+
+main > section:nth-child(9) li {
+    flex: 0 0 120px;
+}
+
+main > section:nth-child(9) img {
+    width: 100%;
+    height: 70px;
+
+    object-fit: contain;
+}
+
+@keyframes partnerScroll {
+    to {
+        transform: translateX(calc(-50% - 15px));
+    }
+}
+
+
+/* DESKTOP */
+
+@media (min-width: 900px) {
+
+    main > section {
+        padding-block: 64px;
+    }
+
+    /* Kleine koppen in hoofdletters, zoals live */
+    main > section:is(:nth-child(4), :nth-child(5), :nth-child(6), :nth-child(8), :nth-child(9)) h2 {
+        margin-bottom: 0;
+
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+
+    /* Links onder een sectie zijn knoppen met een dun randje */
+    main > section > a,
+    main > section:nth-child(5) article a {
+        display: inline-block;
+        margin: 0;
+        padding: 8px 14px;
+
+        border: 1px solid var(--color-text);
+
+        font-size: 11px;
+        letter-spacing: 0.3px;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    main > section > a:hover,
+    main > section:nth-child(5) article a:hover {
+        opacity: 1;
+        background-color: var(--color-text);
+        color: var(--color-background);
+    }
+
+    /* 1. Hero: kleine titel links onderin */
+
+    main > section:first-child {
+        height: clamp(560px, 55vw, 820px);
+    }
+
+    main > section:first-child article {
+        bottom: 40px;
+    }
+
+    main > section:first-child h1 {
+        max-width: 520px;
+        margin-bottom: 14px;
+
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.1;
+        letter-spacing: 0;
+        text-transform: uppercase;
+    }
+
+    main > section:first-child article a {
+        padding: 8px 14px;
+        margin-right: 6px;
+
+        border: 1px solid var(--color-white);
+        background-color: transparent;
+        color: var(--color-white);
+
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+
+    main > section:first-child article a:hover {
+        background-color: var(--color-white);
+        color: var(--color-text);
+    }
+
+    /*  2. Intro */
+
+    main > section:nth-child(2) {
+        padding-block: 100px;
+    }
+
+    main > section:nth-child(2) p {
+        max-width: 1000px;
+
+        font-size: 28px;
+        line-height: 1.3;
+    }
+
+    /* 3. Categorieën: vier naast elkaar, naam in het midden */
+
+    main > section:nth-child(3) > ul {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    main > section:nth-child(3) img {
+        aspect-ratio: 3 / 4;
+    }
+
+    main > section:nth-child(3) span {
+        font-size: clamp(18px, 1.6vw, 24px);
+    }
+
+    /* 4 en 6. Producten: titel links, knop rechts, grijze vlakken */
+
+    main > section:is(:nth-child(4), :nth-child(6)) {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        row-gap: 20px;
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) > h2 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) > a {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) > ul {
+        grid-column: 1 / -1;
+        grid-row: 2;
+
+        gap: 8px;
+        min-width: 0;
+        margin-right: calc(var(--page-padding) * -1);   /* loopt door tot de rand */
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) li {
+        flex: 0 0 calc((100% - 24px) / 4.4);
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) img {
+        aspect-ratio: 3 / 4;
+        margin-bottom: 10px;
+
+        background-color: #ecebe6;
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) h3 {
+        margin-bottom: 3px;
+
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+
+    main > section:is(:nth-child(4), :nth-child(6)) p {
+        margin: 2px 0;
+        font-size: 11px;
+    }
+
+    /*  5. Next event: beeld links, tekst rechts, over de hele breedte  */
+
+    main > section:nth-child(5) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        padding: 0;
+
+        background-color: #e8e7e0;
+    }
+
+    main > section:nth-child(5) figure {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        margin: 0;
+    }
+
+    main > section:nth-child(5) img {
+        aspect-ratio: 3 / 4;
+    }
+
+    main > section:nth-child(5) h2 {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 28px 56px 0;
+    }
+
+    main > section:nth-child(5) article {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: center;
+        padding: 0 56px 56px;
+    }
+
+    main > section:nth-child(5) article > p {
+        max-width: 48ch;
+        font-size: 14px;
+    }
+
+    main > section:nth-child(5) article > p:first-child {
+        font-size: 13px;
+    }
+
+    main > section:nth-child(5) h3 {
+        margin-bottom: 18px;
+
+        font-size: 34px;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+        text-transform: uppercase;
+    }
+
+    main > section:nth-child(5) article a {
+        margin-right: 8px;
+    }
+
+    /* 7. Creators: grote titel, lijn met tags, fotostrook  */
+
+    main > section:nth-child(7) {
+        grid-template-columns: 1fr;
+        padding-bottom: 0;
+    }
+
+    main > section:nth-child(7) h2 {
+        grid-column: 1;
+        grid-row: 1;
+        margin-bottom: 40px;
+
+        font-size: clamp(56px, 8vw, 120px);
+    }
+
+    main > section:nth-child(7) > ul:first-of-type {
+        grid-column: 1;
+        grid-row: 2;
+
+        display: flex;
+        justify-content: space-between;
+
+        margin-bottom: 28px;
+        padding-top: 10px;
+
+        border-top: 1px solid var(--color-text);
+
+        font-size: 11px;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    main > section:nth-child(7) > ul:last-of-type {
+        grid-column: 1;
+        grid-row: 3;
+
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0;
+
+        margin: 0 calc(var(--page-padding) * -1);
+        padding: 0;
+
+        overflow: visible;
+        cursor: default;
+        scroll-snap-type: none;
+    }
+
+    main > section:nth-child(7) > ul:last-of-type li {
+        position: relative;
+        overflow: hidden;
+    }
+
+    main > section:nth-child(7) > ul:last-of-type li::after {
+        content: "";
+
+        position: absolute;
+        inset: 50% 0 0 0;
+
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+        pointer-events: none;
+    }
+
+    main > section:nth-child(7) img {
+        aspect-ratio: 3 / 4;
+        margin-bottom: 0;
+    }
+
+    main > section:nth-child(7) > ul:last-of-type h3,
+    main > section:nth-child(7) > ul:last-of-type p {
+        position: absolute;
+        left: 14px;
+        right: 14px;
+
+        color: var(--color-white);
+        z-index: 1;
+    }
+
+    main > section:nth-child(7) > ul:last-of-type h3 {
+        bottom: 34px;
+        margin: 0;
+
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    main > section:nth-child(7) > ul:last-of-type p {
+        bottom: 14px;
+        font-size: 11px;
+    }
+
+    /* 8. Meet our creators: twee kolommen tekst */
+
+    main > section:nth-child(8) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 56px;
+        max-width: 1100px;
+    }
+
+    main > section:nth-child(8) h2 {
+        grid-column: 1 / -1;
+        margin-bottom: 20px;
+    }
+
+    main > section:nth-child(8) p {
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
+
+    main > section:nth-child(8) > a {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    /* 9. Partners: logo's op een grijze band  */
+
+    main > section:nth-child(9) {
+        padding-top: 0;
+    }
+
+    main > section:nth-child(9) h2 {
+        margin-bottom: 14px;
+    }
+
+    main > section:nth-child(9) > ul {
+        padding-block: 18px;
+
+        background-color: #ecebe6;
+        animation-duration: 28s;
+    }
+
+    main > section:nth-child(9) li {
+        flex-basis: 180px;
+    }
+
+    main > section:nth-child(9) img {
+        height: 60px;
+    }
+}
