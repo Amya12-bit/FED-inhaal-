@@ -1,0 +1,646 @@
+
+/* Mobile-first: basis = telefoon, daarna 700px, 900px, 1100px */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--color-border);
+}
+
+/* BRON: MDN Web Docs — @font-face
+   https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face */
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Roman.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neue Haas";
+    src: url("../fonts/NeueHaasDisplay-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "EB Garamond";
+    src: url("../fonts/EBGaramond-Variable.woff2") format("woff2");
+    font-weight: 400 800;
+    font-display: swap;
+}
+
+:root {
+    --color-background: #f4f1e8;
+    --color-text: #1d1d1d;
+    --color-white: #ffffff;
+    --color-grey: #6b6b6b;
+    --color-border: #d8d4ca;
+
+    --font-main: "Neue Haas", Helvetica, Arial, sans-serif;
+    --font-serif: "EB Garamond", Georgia, serif;
+
+    --transition-fast: 0.25s ease;
+
+    /* Ruimte aan de zijkant */
+    --page-padding: 1.25rem;
+    --page-max: 90rem;
+
+    /* Herbruikbare spacing */
+    --space-xs: 0.25rem;
+    --space-small: 0.5rem;
+    --space-medium: 1rem;
+    --space-large: 1.5rem;
+    --space-xl: 2rem;
+    --space-section: 3rem;
+}
+
+/* BRON: W3Schools — CSS Media Queries
+   https://www.w3schools.com/css/css_rwd_mediaqueries.asp */
+
+@media (min-width: 43.75rem) {
+    :root {
+        --page-padding: 2.5rem;
+    }
+}
+
+@media (min-width: 68.75rem) {
+    :root {
+        --page-padding: 4rem;
+    }
+}
+
+body {
+    width: 100%;
+    max-width: var(--page-max);
+    min-height: 100vh;
+    margin: 0 auto;
+
+    background-color: var(--color-background);
+    color: var(--color-text);
+
+    font-family: var(--font-main);
+    font-size: 1rem;
+    line-height: 1.4;
+
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+video {
+    display: block;
+}
+
+a {
+    color: var(--color-text);
+    transition: opacity var(--transition-fast);
+}
+
+a:hover {
+    opacity: 0.6;
+}
+
+button {
+    font-family: inherit;
+}
+
+ul,
+menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
+p,
+h1,
+h2,
+h3 {
+    margin-top: 0;
+}
+
+/* Verborgen heading voor screenreaders */
+
+[data-visually-hidden] {
+    position: absolute;
+    width: 0.0625rem;
+    height: 0.0625rem;
+    padding: 0;
+    margin: -0.0625rem;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* HEADER */
+
+header {
+    position: relative;
+    display: flex;
+
+    width: 100%;
+    height: 3.625rem;
+    padding: 0 var(--page-padding);
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-background);
+    z-index: 1000;
+}
+
+/* Logo */
+
+header > a {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: -0.0125rem;
+    text-decoration: none;
+    white-space: nowrap;
+
+    z-index: 1001;
+}
+
+/* Menu-paneel */
+
+header > nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 5.625rem var(--page-padding) 2.5rem;
+
+    background-color: var(--color-background);
+    transform: translateY(-100%);
+    visibility: hidden;
+    overflow-y: auto;
+
+    transition:
+        transform 0.55s cubic-bezier(0.77, 0, 0.18, 1),
+        visibility 0s linear 0.55s;
+
+    z-index: 1500;
+}
+
+header[data-menu="open"] > nav {
+    transform: translateY(0);
+    visibility: visible;
+
+    transition:
+        transform 0.55s cubic-bezier(0.77, 0, 0.18, 1),
+        visibility 0s;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+header nav a {
+    display: block;
+
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+
+    opacity: 0;
+    transform: translateY(1.5625rem);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+header[data-menu="open"] nav a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+header[data-menu="open"] nav a:hover {
+    opacity: 0.6;
+}
+
+header[data-menu="open"] nav li:nth-child(1) a {
+    transition-delay: 0.10s;
+}
+
+header[data-menu="open"] nav li:nth-child(2) a {
+    transition-delay: 0.15s;
+}
+
+header[data-menu="open"] nav li:nth-child(3) a {
+    transition-delay: 0.20s;
+}
+
+header[data-menu="open"] nav li:nth-child(4) a {
+    transition-delay: 0.25s;
+}
+
+header[data-menu="open"] nav li:nth-child(5) a {
+    transition-delay: 0.30s;
+}
+
+/* Hamburger */
+
+header > button {
+    position: absolute;
+    top: 0.6875rem;
+    left: calc(var(--page-padding) - 0.375rem);
+
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0.375rem;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    z-index: 2001;
+}
+
+header > button span {
+    display: block;
+    width: 1.4375rem;
+    height: 0.09375rem;
+    margin: 0.1875rem 0;
+
+    background-color: var(--color-text);
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.25s ease;
+}
+
+/* Dit maakt het logo een kruis */
+
+header[data-menu="open"] > button span:nth-child(1) {
+    transform: translateY(0.4375rem) rotate(45deg);
+}
+
+header[data-menu="open"] > button span:nth-child(2) {
+    opacity: 0;
+}
+
+header[data-menu="open"] > button span:nth-child(3) {
+    transform: translateY(-0.4375rem) rotate(-45deg);
+}
+
+/* Zoeken en winkelmandje */
+
+header > menu {
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    height: 3.625rem;
+
+    align-items: center;
+    gap: 0.4375rem;
+
+    z-index: 1001;
+}
+
+header > menu:first-of-type {
+    left: calc(var(--page-padding) + 1.875rem);
+}
+
+header > menu:last-of-type {
+    right: calc(var(--page-padding) - 0.375rem);
+}
+
+header > menu button {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0.375rem;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+
+    transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+header > menu button:hover {
+    opacity: 0.55;
+    transform: scale(1.05);
+}
+
+header > menu svg {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+}
+
+/* Desktop header */
+
+@media (min-width: 56.25rem) {
+
+    header {
+        height: 4.25rem;
+    }
+
+    header > button {
+        display: none;
+    }
+
+    header > nav {
+        position: absolute;
+        top: 0;
+        left: var(--page-padding);
+
+        display: flex;
+        width: auto;
+        height: 4.25rem;
+        padding: 0;
+
+        align-items: center;
+        background: transparent;
+        transform: none;
+        visibility: visible;
+        overflow: visible;
+
+        transition: none;
+    }
+
+    header nav ul {
+        flex-direction: row;
+        align-items: center;
+        gap: 1.75rem;
+    }
+
+    header nav a,
+    header[data-menu="open"] nav a {
+        font-size: 0.875rem;
+        opacity: 1;
+        transform: none;
+        transition-delay: 0s;
+    }
+
+    header nav a:hover,
+    header[data-menu="open"] nav a:hover {
+        opacity: 0.6;
+    }
+
+    header > menu {
+        height: 4.25rem;
+    }
+
+    header > menu:first-of-type {
+        left: auto;
+        right: calc(var(--page-padding) + 4.75rem);
+    }
+
+    header > menu:last-of-type {
+        right: calc(var(--page-padding) - 0.375rem);
+    }
+
+    header > a {
+        font-size: 0.9375rem;
+    }
+}
+
+/* FOOTER */
+
+footer {
+    background-color: var(--color-text);
+    color: var(--color-background);
+}
+
+footer > ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+footer > ul img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+footer h2 {
+    margin: 0 var(--page-padding);
+    padding: 1.75rem 0 0.875rem;
+
+    border-bottom: 0.0625rem solid rgba(244, 241, 232, 0.35);
+
+    font-size: clamp(1.625rem, 7.4vw, 6.875rem);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: justify;
+    text-align-last: justify;
+}
+
+footer nav {
+    padding: 1.5rem var(--page-padding) 0;
+}
+
+footer nav ul:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 0.25rem 1.25rem;
+
+    margin-bottom: 1.875rem;
+}
+
+footer nav ul:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+footer a {
+    color: inherit;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+footer a:focus-visible {
+    outline-color: var(--color-background);
+}
+
+footer > p {
+    margin: 1.625rem var(--page-padding) 0.375rem;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+footer > a {
+    display: block;
+    margin: 0 var(--page-padding);
+}
+
+footer > a:last-of-type {
+    font-weight: 400;
+    text-transform: none;
+}
+
+/* Afbeelding met betaalmethodes */
+
+footer > img {
+    width: 15rem;
+    max-width: calc(100% - var(--page-padding) * 2);
+    margin: 2.5rem var(--page-padding) 0;
+}
+
+footer > p:last-child {
+    margin: 1rem var(--page-padding) 0;
+    padding-bottom: 1.75rem;
+
+    font-weight: 400;
+    text-transform: none;
+    opacity: 0.8;
+}
+
+/* Desktop footer */
+
+@media (min-width: 56.25rem) {
+
+    footer nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 2.5rem;
+    }
+
+    footer nav ul:first-child {
+        grid-template-columns: repeat(2, minmax(7.5rem, auto));
+        gap: 0.375rem 3.75rem;
+
+        margin-bottom: 0;
+    }
+
+    footer nav ul:last-child {
+        gap: 0.375rem;
+    }
+
+    footer a,
+    footer > p {
+        font-size: 0.8125rem;
+    }
+
+    footer {
+        position: relative;
+    }
+
+    footer > img {
+        position: absolute;
+        right: var(--page-padding);
+        bottom: 1.5rem;
+
+        width: 18.75rem;
+        margin: 0;
+    }
+
+    footer > p:last-child {
+        margin-top: 3.125rem;
+        padding-top: 1.5rem;
+
+        border-top: 0.0625rem solid rgba(244, 241, 232, 0.35);
+    }
+}
+
+/* SCROLL-ANIMATIE */
+
+[data-reveal="hidden"] {
+    opacity: 0;
+    transform: translateY(2.1875rem);
+}
+
+[data-reveal] {
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+[data-reveal="visible"] {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--delay, 0s);
+}
+
+/* TOEGANKELIJKHEID */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+ul:focus-visible {
+    outline: 0.125rem solid var(--color-text);
+    outline-offset: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+    }
+
+    [data-reveal="hidden"] {
+        opacity: 1;
+        transform: none;
+    }
+}
